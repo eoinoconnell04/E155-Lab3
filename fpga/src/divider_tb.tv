@@ -1,0 +1,28 @@
+// Eoin O'Connell, 9/3/2025, eoconnell@g.hmc.edu
+// Test vectors for divider (counts to 10 and resets)
+// divided_clk
+0 // 10 cycles of 0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+1 // 10 cycles of 1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+0 // 10 cycles of 0 ... (truncated)
+0
+0
+0
+0
