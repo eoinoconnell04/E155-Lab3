@@ -40,7 +40,7 @@ module store_keypresses_tb();
     always @(negedge clk)
         if (~reset) begin // skip during reset
             if ({new_digit,old_digit} !== expected) begin // check result
-                $display("Error: input = %b, %b", new_digit, key_pressed_value);
+                $display("Error: input = %b, %b", new_key, key_pressed_value);
                 $display("output = %b, %b (%b expected)", new_digit, old_digit, expected);
                 errors = errors + 1;
             end
