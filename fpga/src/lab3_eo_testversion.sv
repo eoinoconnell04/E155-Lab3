@@ -44,14 +44,14 @@ module lab3_eo_testversion(
     //keypad k (keypad_sync, key_pressed);
 
     // Initialize phase shifter to drive 4 keyboard vertical rails
-    clock_phase_shifter c (clk, keypad_vert);
+    clock_phase_shifter c (clk, reset, keypad_vert);
 
     // Initialize keypad output to key mapping
     keypad_mapper km (keypad_vert_shifted, keypad_sync, keys_pressed);
 
     // Initialize FSM to control for switch jitter
     // should this return a hex number and an enable or other singal to signify a switch
-    jitter_controller #(.CYCLE_WAIT_TIME(2_000_000)) j (clk, keys_pressed, key_pressed_value, new_key);
+    jitter_controller #(.CYCLE_WAIT_TIME(2_000_000)) j (clk, reset, keys_pressed, key_pressed_value, new_key);
 
     // Register to store last 2 key presses
     store_keypresses s (clk, reset, new_key, key_pressed_value, new_digit, old_digit);
