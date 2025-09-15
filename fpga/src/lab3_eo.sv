@@ -40,13 +40,13 @@ module lab3_eo(
     synchronizer s2 (clk, reset, keypad_vert, keypad_vert_shifted);
 
     // Initialize keypad reader module
-    keypad k (keypad_sync, key_pressed);
+    //keypad k (keypad_sync, key_pressed);
 
     // Initialize phase shifter to drive 4 keyboard vertical rails
     clock_phase_shifter c (clk, keypad_vert);
 
     // Initialize keypad output to key mapping
-    keypad_mapper km (keypad_vert_shifted, keypad_hori, keys_pressed);
+    keypad_mapper km (keypad_vert_shifted, keypad_sync, keys_pressed);
 
     // Initialize FSM to control for switch jitter
     // should this return a hex number and an enable or other singal to signify a switch
