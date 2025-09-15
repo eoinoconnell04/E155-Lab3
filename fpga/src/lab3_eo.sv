@@ -47,7 +47,7 @@ module lab3_eo(
     jitter_controller j (divided_clk_keypad, keypad_sync, key_pressed_value, new_key);
 
     // Register to store last 2 key presses
-    store_keypresses s (divided_clk_keypad, new_key, key_pressed_value, new_digit, old_digit);
+    store_keypresses s (divided_clk_keypad, reset, new_key, key_pressed_value, new_digit, old_digit);
 
 	// Seven segment display Input Mux (if divided_clk is high, then s1 selected. If divided_clk is low then s2 selected)
 	assign display_input = divided_clk_display ? new_digit : old_digit;

@@ -5,7 +5,7 @@ Date: Sep. 14, 2025
 Module Function: This module stores the most recent keypress, and the key press before that
 */
 module store_keypresses (
-    input logic clk, 
+    input logic clk, reset,
     input logic new_key, 
     input logic [15:0] key_pressed_value, 
     output logic [15:0] new_digit, 

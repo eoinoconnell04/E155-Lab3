@@ -15,7 +15,7 @@ module store_keypresses_tb();
     logic [48:0] testvectors[10000:0];  // 17 input bits, 32 output bits
 
     // instantiate device under test
-    store_keypresses dut(clk, new_key, key_pressed_value, new_digit, old_digit);
+    store_keypresses dut(clk, ~reset, new_key, key_pressed_value, new_digit, old_digit);
 
 
     // generate clock
