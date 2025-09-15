@@ -1,8 +1,8 @@
 /*
 Author: Eoin O'Connell
 Email: eoconnell@hmc.edu
-Date: Sep. 14, 2025
-Module Function: Testbench to test clock phase shifter module for E155 Lab 1.
+Date: Sep. 15, 2025
+Module Function: Testbench to test store_keypresses module for E155 Lab 3.
 */
 
 
