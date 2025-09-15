@@ -5,13 +5,6 @@ Date: Sep. 15, 2025
 Module Function: Testbench to test top level module for E155 Lab 3.
 */
 
-lab3_eo(
-	input  logic reset,
-    input  logic [3:0] keypad_hori,
-    output logic [3:0] keypad_vert,
-	output logic [6:0] seg,
-	output logic display1, display2
-);
 module lab2_eo_tb();
     logic clk, reset;
     logic [3:0] keypad_hori, keypad_vert;
