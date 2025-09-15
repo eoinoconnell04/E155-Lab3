@@ -25,38 +25,38 @@ module display (
     output logic [15:0] key_pressed
 );
 
-    logic [3:0] adjusted_vert;
+    //logic [3:0] adjusted_vert;
 
     // Rotate right by 1 bit (circular shift) 0010 -> 0001
-    assign adjusted_vert = {keypad_vert[0], keypad_vert[3:1]};
+    //assign adjusted_vert = {keypad_vert[0], keypad_vert[3:1]};
 
 
     always_comb begin
         key_pressed = 16'b0;
 
         // Row 3
-        if (adjusted_vert[0] && keypad_hori[3]) key_pressed[0]  = 1; // '1'
-        if (adjusted_vert[1] && keypad_hori[3]) key_pressed[1]  = 1; // '2'
-        if (adjusted_vert[2] && keypad_hori[3]) key_pressed[2]  = 1; // '3'
-        if (adjusted_vert[3] && keypad_hori[3]) key_pressed[3]  = 1; // 'C'
+        if (keypad_vert[0] && keypad_hori[3]) key_pressed[0]  = 1; // '1'
+        if (keypad_vert[1] && keypad_hori[3]) key_pressed[1]  = 1; // '2'
+        if (keypad_vert[2] && keypad_hori[3]) key_pressed[2]  = 1; // '3'
+        if (keypad_vert[3] && keypad_hori[3]) key_pressed[3]  = 1; // 'C'
 
         // Row 2
-        if (adjusted_vert[0] && keypad_hori[2]) key_pressed[4]  = 1; // '4'
-        if (adjusted_vert[1] && keypad_hori[2]) key_pressed[5]  = 1; // '5'
-        if (adjusted_vert[2] && keypad_hori[2]) key_pressed[6]  = 1; // '6'
-        if (adjusted_vert[3] && keypad_hori[2]) key_pressed[7]  = 1; // 'D'
+        if (keypad_vert[0] && keypad_hori[2]) key_pressed[4]  = 1; // '4'
+        if (keypad_vert[1] && keypad_hori[2]) key_pressed[5]  = 1; // '5'
+        if (keypad_vert[2] && keypad_hori[2]) key_pressed[6]  = 1; // '6'
+        if (keypad_vert[3] && keypad_hori[2]) key_pressed[7]  = 1; // 'D'
 
         // Row 1
-        if (adjusted_vert[0] && keypad_hori[1]) key_pressed[8]  = 1; // '7'
-        if (adjusted_vert[1] && keypad_hori[1]) key_pressed[9]  = 1; // '8'
-        if (adjusted_vert[2] && keypad_hori[1]) key_pressed[10] = 1; // '9'
-        if (adjusted_vert[3] && keypad_hori[1]) key_pressed[11] = 1; // 'E'
+        if (keypad_vert[0] && keypad_hori[1]) key_pressed[8]  = 1; // '7'
+        if (keypad_vert[1] && keypad_hori[1]) key_pressed[9]  = 1; // '8'
+        if (keypad_vert[2] && keypad_hori[1]) key_pressed[10] = 1; // '9'
+        if (keypad_vert[3] && keypad_hori[1]) key_pressed[11] = 1; // 'E'
 
         // Row 0
-        if (adjusted_vert[0] && keypad_hori[0]) key_pressed[12] = 1; // 'A'
-        if (adjusted_vert[1] && keypad_hori[0]) key_pressed[13] = 1; // '0'
-        if (adjusted_vert[2] && keypad_hori[0]) key_pressed[14] = 1; // 'B'
-        if (adjusted_vert[3] && keypad_hori[0]) key_pressed[15] = 1; // 'F'
+        if (keypad_vert[0] && keypad_hori[0]) key_pressed[12] = 1; // 'A'
+        if (keypad_vert[1] && keypad_hori[0]) key_pressed[13] = 1; // '0'
+        if (keypad_vert[2] && keypad_hori[0]) key_pressed[14] = 1; // 'B'
+        if (keypad_vert[3] && keypad_hori[0]) key_pressed[15] = 1; // 'F'
     end
 
 endmodule
