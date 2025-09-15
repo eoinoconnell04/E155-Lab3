@@ -24,7 +24,7 @@ module synchronizer
         end 
         else begin
             sync_output <= intermediate_value;
-            intermediate <= async_input;
+            intermediate_value <= async_input;
         end 
     end
 
