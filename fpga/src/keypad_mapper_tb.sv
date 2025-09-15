@@ -16,9 +16,6 @@ module keypad_mapper_tb();
 
     // instantiate device under test
     keypad_mapper dut(keypad_vert, keypad_hori, key_pressed);
-    input  logic [3:0] keypad_vert,
-    input  logic [3:0] keypad_hori,
-    output logic [15:0] key_pressed
 
     // generate clock
     always begin
