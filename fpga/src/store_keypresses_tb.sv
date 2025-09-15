@@ -33,7 +33,7 @@ module store_keypresses_tb();
     // apply test vectors on rising edge of clk
     always @(posedge clk) begin
         $display("%b", testvectors[vectornum]);
-		#1; {expected} = testvectors[vectornum];
+		#1; {new_key, key_pressed_value, expected} = testvectors[vectornum];
     end
 
     // check results on falling edge of clk

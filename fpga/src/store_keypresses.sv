@@ -10,7 +10,7 @@ module store_keypresses (
     input logic [15:0] key_pressed_value, 
     output logic [15:0] new_digit, 
     output logic [15:0] old_digit
-)
+);
 
     always_ff @(posedge clk) begin
         if (reset == 0) begin
