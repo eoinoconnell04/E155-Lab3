@@ -1,3 +1,6 @@
+// Eoin O'Connell, 9/15/2025, eoconnell@g.hmc.edu
+// Test vectors for clock_phase_shifter mdoule
+// contains expected one hot phase shifted output 
 0001
 0010
 0100
