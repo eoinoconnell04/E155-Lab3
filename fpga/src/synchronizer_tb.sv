@@ -30,7 +30,7 @@ module synchronizer_tb();
     // apply test vectors on rising edge of clk
     always @(posedge clk) begin
         $display("%b", testvectors[vectornum]);
-		#1; {expected} = testvectors[vectornum];
+		#1; {async_input, expected} = testvectors[vectornum];
     end
 
     // check results on falling edge of clk
