@@ -19,7 +19,7 @@ Row 1  7 8 9 E
 Row 0  A 0 B F
 */
 
-module display (
+module keypad_mapper (
     input  logic [3:0] keypad_vert,
     input  logic [3:0] keypad_hori,
     output logic [15:0] key_pressed
