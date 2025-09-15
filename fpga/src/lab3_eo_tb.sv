@@ -14,7 +14,7 @@ module lab3_eo_tb();
     logic [16:0] testvectors[10000:0];  //  8 bits of input, 9 output (22 total)
 
     // instantiate device under test
-    lab3_eo_testversion dut(clk, reset, keypad_hori, keypad_vert, seg, display1, display2);
+    lab3_eo_testversion dut(clk, ~reset, keypad_hori, keypad_vert, seg, display1, display2);
 
     // generate clock
     always begin
