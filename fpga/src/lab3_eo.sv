@@ -12,7 +12,6 @@ module lab3_eo(
     output logic [3:0] keypad_vert,
 	output logic [6:0] seg,
 	output logic display1, display2,
-	output logic [4:0] led
 );
 
 	// Initialize internal signals

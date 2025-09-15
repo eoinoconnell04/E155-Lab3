@@ -1,12 +1,12 @@
 // Eoin O'Connell, 8/31/2025, eoconnell@g.hmc.edu
-// Test vectors for keypad_mapper module
-// test vector format: {keypad_vert}_{keypad_hori}_{keys_pressed}
-// Keypad layout:
-// Column 0 1 2 3
-// Row 3: 1 2 3 C
-// Row 2  4 5 6 D
-// Row 1  7 8 9 E
-// Row 0  A 0 B F
+// Test vectors for top level lab3_eo.sv
+// test vector format: {keypad_hori}_{seg}_{display1}_{display2}
+Keypad layout:
+Column 0 1 2 3
+Row 3: 1 2 3 C
+Row 2  4 5 6 D
+Row 1  7 8 9 E
+Row 0  A 0 B F
 0001_1110_0000000000000010   // Row3 high, Col0 low -> '1'
 0001_1101_0000000000000100   // Row3 high, Col1 low -> '2'
 0001_1011_0000000000001000   // Row3 high, Col2 low -> '3'
