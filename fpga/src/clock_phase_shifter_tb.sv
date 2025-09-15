@@ -6,7 +6,7 @@ Module Function: Testbench to test clock phase shifter module for E155 Lab 1.
 */
 
 
-module display_tb();
+module clock_phase_shifter_tb();
     logic clk, reset;
     logic [3:0] expected, one_hot_output;
     logic [31:0] vectornum, errors;
