@@ -19,11 +19,11 @@ module synchronizer
 
     always_ff @(posedge clk) begin
         if (reset == 0) begin
-            intermediate     <= 0;
+            intermediate_value     <= 0;
             sync_output     <= 0;
         end 
         else begin
-            sync_output <= intermediate;
+            sync_output <= intermediate_value;
             intermediate <= async_input;
         end 
     end
