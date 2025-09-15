@@ -2,12 +2,13 @@
 Author: Eoin O'Connell
 Email: eoconnell@hmc.edu
 Date: Sep. 9, 2025
-Module Function: This is the top level module for E155 Lab 3. It performs 2 main functions:
-1. Controls two seven segment display as a function of two different 4 input dip switches.
-2. Controls 5 led lights that display the binary sum of the two hex digits.
+Module Function: This is the test version of top level module for E155 Lab 3.
+Changes
+1. reduces number of cycles
+2. uses clock as input
 */
-module lab3_eo(
-	input  logic reset,
+module lab3_eo_testversion(
+	input  logic clk, reset,
     input  logic [3:0] keypad_hori,
     output logic [3:0] keypad_vert,
 	output logic [6:0] seg,
@@ -16,7 +17,7 @@ module lab3_eo(
 
 	// Initialize internal signals
     //logic divided_clk_keypad;
-	logic clk, divided_clk_display;
+	logic divided_clk_display;
 	logic [3:0] display_input;
     logic [3:0] keypad_sync;
     logic [3:0] keypad_vert_shifted;
@@ -25,13 +26,13 @@ module lab3_eo(
     logic [3:0] new_digit_hex, old_digit_hex;
 	
 	// Internal high-speed oscillator (outputs 48 Mhz clk)
-	HSOSC hf_osc (.CLKHFPU(1'b1), .CLKHFEN(1'b1), .CLKHF(clk));
+	//HSOSC hf_osc (.CLKHFPU(1'b1), .CLKHFEN(1'b1), .CLKHF(clk));
 
     // Initialize clock divider for keypad
     //divider #(.TOGGLE_COUNT(1000)) div_keypad (.clk(clk), .reset(reset), .divided_clk(divided_clk_keypad));
 
     // Initialize clock divider for seven segment display (Goal frequency ~250 Hz, 48 Mhz / n = 250 Hz, n = 192000).
-    divider #(.TOGGLE_COUNT(192000)) div_display (.clk(clk), .reset(reset), .divided_clk(divided_clk_display));
+    divider #(.TOGGLE_COUNT(0)) div_display (.clk(clk), .reset(reset), .divided_clk(divided_clk_display));
 
     // synchronizer to make sure that all keyboard inputs are stable
     synchronizer s1 (clk, reset, keypad_hori, keypad_sync);
