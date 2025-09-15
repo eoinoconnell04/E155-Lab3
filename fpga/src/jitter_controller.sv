@@ -36,8 +36,8 @@ module jitter_controller     #(parameter CYCLE_WAIT_TIME=50)
     logic [15:0] active_key;
 
     // State register
-    always_ff @(posedge clk or posedge reset) begin
-        if (reset)
+    always_ff @(posedge clk or negedge reset) begin
+        if (~reset)
             state <= IDLE;
         else
             state <= next_state;
@@ -60,8 +60,8 @@ module jitter_controller     #(parameter CYCLE_WAIT_TIME=50)
     end
 
     // Counter logic
-    always_ff @(posedge clk or posedge reset) begin
-        if (reset) begin
+    always_ff @(posedge clk or negedge reset) begin
+        if (~reset) begin
             counter <= 0;
         end else begin
             if (state == ACTIVE) begin
@@ -76,8 +76,8 @@ module jitter_controller     #(parameter CYCLE_WAIT_TIME=50)
     end
 
     // Output and active key logic
-    always_ff @(posedge clk or posedge reset) begin
-        if (reset) begin
+    always_ff @(posedge clk or negedge reset) begin
+        if (~reset) begin
             key_pressed_value <= 0;
             new_key <= 0;
             active_key <= 0;
