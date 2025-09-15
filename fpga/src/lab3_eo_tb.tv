@@ -1,28 +1,12 @@
 // Eoin O'Connell, 8/31/2025, eoconnell@g.hmc.edu
 // Test vectors for top level lab3_eo.sv
 // test vector format: {keypad_hori}_{seg}_{display1}_{display2}
-Keypad layout:
-Column 0 1 2 3
-Row 3: 1 2 3 C
-Row 2  4 5 6 D
-Row 1  7 8 9 E
-Row 0  A 0 B F
-0001_1110_0000000000000010   // Row3 high, Col0 low -> '1'
-0001_1101_0000000000000100   // Row3 high, Col1 low -> '2'
-0001_1011_0000000000001000   // Row3 high, Col2 low -> '3'
-0001_0111_0001000000000000   // Row3 high, Col3 low -> 'C'
+0000_1000000_0_1 // initial display will be 0
+0000_
+0000_
+0000_
+0001_
+0000_
+0000_
+0000_
 
-0010_1110_0000000000010000   // Row2 high, Col0 low -> '4'
-0010_1101_0000000000100000   // Row2 high, Col1 low -> '5'
-0010_1011_0000000001000000   // Row2 high, Col2 low -> '6'
-0010_0111_0010000000000000   // Row2 high, Col3 low -> 'D'
-
-0100_1110_0000000010000000   // Row1 high, Col0 low -> '7'
-0100_1101_0000000100000000   // Row1 high, Col1 low -> '8'
-0100_1011_0000001000000000   // Row1 high, Col2 low -> '9'
-0100_0111_0100000000000000   // Row1 high, Col3 low -> 'E'
-
-1000_1110_0000010000000000   // Row0 high, Col0 low -> 'A'
-1000_1101_0000000000000001   // Row0 high, Col1 low -> '0'
-1000_1011_0000100000000000   // Row0 high, Col2 low -> 'B'
-1000_0111_1000000000000000   // Row0 high, Col3 low -> 'F'

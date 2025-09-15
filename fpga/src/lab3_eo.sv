@@ -19,7 +19,9 @@ module lab3_eo(
 	logic [3:0] display_input;
     logic [3:0] keypad_sync;
     logic [3:0] keypad_vert_shifted;
-    logic [15:0] keys_pressed;
+    logic [15:0] keys_pressed, key_pressed_value, new_digit, old_digit;
+    logic new_key;
+    logic [3:0] new_digit_hex, old_digit_hex;
 	
 	// Internal high-speed oscillator (outputs 48 Mhz clk)
 	HSOSC hf_osc (.CLKHFPU(1'b1), .CLKHFEN(1'b1), .CLKHF(clk));
@@ -52,8 +54,12 @@ module lab3_eo(
     // Register to store last 2 key presses
     store_keypresses s (divided_clk_keypad, reset, new_key, key_pressed_value, new_digit, old_digit);
 
+    // Convert one hot to hex to display them
+    onehot_to_hex o1 (new_digit, new_digit_hex);
+    onehot_to_hex o2 (old_digit, old_digit_hex);
+
 	// Seven segment display Input Mux (if divided_clk is high, then s1 selected. If divided_clk is low then s2 selected)
-	assign display_input = divided_clk_display ? new_digit : old_digit;
+	assign display_input = divided_clk_display ? new_digit_hex : old_digit_hex;
 
 	// Choose which seven segment display to power.
 	assign display1 = divided_clk_display;
