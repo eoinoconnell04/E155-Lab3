@@ -44,7 +44,7 @@ module lab3_eo(
 
     // Initialize FSM to control for switch jitter
     // should this return a hex number and an enable or other singal to signify a switch
-    jitter_controller j (divided_clk_keypad, keypad_sync, key_pressed_value, new_key);
+    jitter_controller j (divided_clk_keypad, keys_pressed, key_pressed_value, new_key);
 
     // Register to store last 2 key presses
     store_keypresses s (divided_clk_keypad, reset, new_key, key_pressed_value, new_digit, old_digit);
