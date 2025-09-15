@@ -8,8 +8,6 @@ Module Function: This is the top level module for E155 Lab 3. It performs 2 main
 */
 module lab3_eo(
 	input  logic reset,
-	input  logic [3:0] s1,
-	input  logic [3:0] s2,
     input  logic [3:0] keypad_hori,
     output logic [3:0] keypad_vert,
 	output logic [6:0] seg,
@@ -18,7 +16,7 @@ module lab3_eo(
 );
 
 	// Initialize internal signals
-	logic clk, divided_clk;
+	logic clk, divided_clk_keypad, divided_clk_display;
 	logic [3:0] display_input;
     logic [3:0] keypad_sync;
     logic [15:0] keys_pressed;
@@ -26,31 +24,37 @@ module lab3_eo(
 	// Internal high-speed oscillator (outputs 48 Mhz clk)
 	HSOSC hf_osc (.CLKHFPU(1'b1), .CLKHFEN(1'b1), .CLKHF(clk));
 
-    // Initialize clock divider (Goal frequency ~250 Hz, 48 Mhz / n = 250 Hz, n = 192000).
-    divider #(.TOGGLE_COUNT(192000)) div (.clk(clk), .reset(reset), .divided_clk(divided_clk));
+    // Initialize clock divider for keypad
+    divider #(.TOGGLE_COUNT(192000)) div_keypad (.clk(clk), .reset(reset), .divided_clk(divided_clk_keypad));
+
+    // Initialize clock divider for seven segment display (Goal frequency ~250 Hz, 48 Mhz / n = 250 Hz, n = 192000).
+    divider #(.TOGGLE_COUNT(192000)) div_display (.clk(clk), .reset(reset), .divided_clk(divided_clk_display));
 
     // Synchronizer to make sure that all keyboard inputs are stable
-    synchronizer s (divided_clk, keypad_hori, keypad_sync);
+    synchronizer s (divided_clk_keypad, keypad_hori, keypad_sync);
 
     // Initialize keypad reader module
     keypad k (keypad_sync, key_pressed);
 
     // Initialize phase shifter to drive 4 keyboard vertical rails
-    clock_phase_shifter c (divided_clk, keypad_vert);
+    clock_phase_shifter c (divided_clk_keypad, keypad_vert);
 
     // Initialize keypad output to key mapping
     keypad_mapper km (keypad_vert, keypad_hori, keys_pressed);
 
     // Initialize FSM to control for switch jitter
     // should this return a hex number and an enable or other singal to signify a switch
-    jitter_controller j (divided_clk, keypad_sync, key_pressed_value, new_key);
+    jitter_controller j (divided_clk_keypad, keypad_sync, key_pressed_value, new_key);
+
+    // Register to store last 2 key presses
+    store_keypresses s (divided_clk_keypad, new_key, key_pressed_value, new_digit, old_digit);
 
 	// Seven segment display Input Mux (if divided_clk is high, then s1 selected. If divided_clk is low then s2 selected)
-	assign display_input = divided_clk ? s1 : s2;
+	assign display_input = divided_clk_display ? new_digit : old_digit;
 
 	// Choose which seven segment display to power.
-	assign display1 = divided_clk;
-	assign display2 = ~divided_clk;
+	assign display1 = divided_clk_display;
+	assign display2 = ~divided_clk_display;
 
     // Initialize single seven segment display
     display dis (.s(display_input), .seg(seg));
