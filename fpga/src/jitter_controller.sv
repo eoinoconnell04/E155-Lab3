@@ -53,7 +53,7 @@ module jitter_controller     #(parameter CYCLE_WAIT_TIME=50)
             end
 
             ACTIVE: begin
-                if (counter == CYCLE_WAIT_TIME)
+                if (counter == CYCLE_WAIT_TIME - 1)
                     next_state = IDLE;
             end
         endcase
