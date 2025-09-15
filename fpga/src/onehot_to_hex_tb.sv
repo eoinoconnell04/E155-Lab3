@@ -11,7 +11,7 @@ module onehot_to_hex_tb();
     logic [15:0] one_hot;
     logic [3:0] expected, hex_value;
     logic [31:0] vectornum, errors;
-    logic [10:0] testvectors[10000:0];  // 16 input bits, 4 output bits
+    logic [19:0] testvectors[10000:0];  // 16 input bits, 4 output bits
 
     // instantiate device under test
     onehot_to_hex dut(one_hot, hex_value);
@@ -44,7 +44,7 @@ module onehot_to_hex_tb();
                 errors = errors + 1;
             end
             vectornum = vectornum + 1;
-            if (testvectors[vectornum] === 4'bx) begin
+            if (testvectors[vectornum] === 20'bx) begin
                 $display("%d tests completed with %d errors", vectornum, errors);
                 $stop;
             end
