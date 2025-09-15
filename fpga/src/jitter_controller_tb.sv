@@ -37,12 +37,12 @@ module synchronizer_tb();
     // check results on falling edge of clk
     always @(negedge clk)
         if (~reset) begin // skip during reset
-            if (key_pressed_value, new_key !== expected) begin // check result
+            if ({key_pressed_value, new_key} !== expected) begin // check result
                 $display("Error: output = %b, %b (%b expected)", key_pressed_value, new_key, expected);
                 errors = errors + 1;
             end
             vectornum = vectornum + 1;
-            if (testvectors[vectornum] === 33'bx) begin
+            if (testvectors[vectornum] == 33'bx) begin
                 $display("%d tests completed with %d errors", vectornum, errors);
                 $stop;
             end

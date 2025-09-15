@@ -20,7 +20,7 @@ module jitter_controller     #(parameter CYCLE_WAIT_TIME=50)
 
     // Initiallize signal that is high when multiple keys are currently pressed
     logic multiple_keys_pressed;
-    assign multiple_keys_pressed = (input_signal & (input_signal - 1)) != 0;
+    assign multiple_keys_pressed = (keys_pressed & (keys_pressed - 1)) != 0;
 
     typedef enum logic [0:0] {IDLE, ACTIVE} statetype;
     statetype state, next_state;
@@ -65,7 +65,7 @@ module jitter_controller     #(parameter CYCLE_WAIT_TIME=50)
             counter <= 0;
         end else begin
             if (state == ACTIVE) begin
-                if (keypad_sync == active_key)
+                if (keys_pressed == active_key)
                     counter <= 0; // only reset if same key still pressed
                 else if (counter < CYCLE_WAIT_TIME)
                     counter <= counter + 1;
@@ -85,7 +85,7 @@ module jitter_controller     #(parameter CYCLE_WAIT_TIME=50)
             new_key <= 0;
 
             if (state == IDLE && keypad_nonzero && ~multiple_keys_pressed) begin
-                key_pressed_value <= keypad_sync;
+                key_pressed_value <= keys_pressed;
                 active_key <= keys_pressed; // remember the key
                 new_key <= 1;              // pulse new_key
             end
