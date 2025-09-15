@@ -15,7 +15,7 @@ module synchronizer
     output logic [NUM_BITS-1:0] sync_output
 );
 
-    logic intermediate_value;
+    logic [NUM_BITS-1:0] intermediate_value;
 
     always_ff @(posedge clk) begin
         if (reset == 0) begin
