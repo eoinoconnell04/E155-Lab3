@@ -6,7 +6,7 @@ Module Function: Testbench to test jitter_controller module for E155 Lab 3.
 */
 
 
-module synchronizer_tb();
+module jitter_controller_tb();
     logic clk, reset;
     logic [15:0] keys_pressed, key_pressed_value;
     logic [16:0] expected;
