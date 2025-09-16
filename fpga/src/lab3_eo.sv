@@ -15,7 +15,7 @@ module lab3_eo(
 );
 
 	// Initialize internal signals
-    logic divided_clk_keypad;
+    //logic divided_clk_keypad;
 	logic clk, divided_clk_display;
 	logic [3:0] display_input;
     logic [3:0] keypad_sync;
@@ -28,32 +28,32 @@ module lab3_eo(
 	HSOSC hf_osc (.CLKHFPU(1'b1), .CLKHFEN(1'b1), .CLKHF(clk));
 
     // Initialize clock divider for keypad
-    divider #(.TOGGLE_COUNT(1000)) div_keypad (.clk(clk), .reset(reset), .divided_clk(divided_clk_keypad));
+    //divider #(.TOGGLE_COUNT(1000)) div_keypad (.clk(clk), .reset(reset), .divided_clk(divided_clk_keypad));
 
     // Initialize clock divider for seven segment display (Goal frequency ~250 Hz, 48 Mhz / n = 250 Hz, n = 192000).
     divider #(.TOGGLE_COUNT(192000)) div_display (.clk(clk), .reset(reset), .divided_clk(divided_clk_display));
 
     // synchronizer to make sure that all keyboard inputs are stable
-    synchronizer s1 (divided_clk_keypad, reset, keypad_hori, keypad_sync);
+    synchronizer s1 (clk, reset, keypad_hori, keypad_sync);
 
     // syncronizer for clock_phase_shifter to allign with keyboard inputs
-    synchronizer s2 (divided_clk_keypad, reset, keypad_vert, keypad_vert_shifted);
+    synchronizer s2 (clk, reset, keypad_vert, keypad_vert_shifted);
 
     // Initialize keypad reader module
     //keypad k (keypad_sync, key_pressed);
 
     // Initialize phase shifter to drive 4 keyboard vertical rails
-    clock_phase_shifter c (divided_clk_keypad, reset, keypad_vert);
+    clock_phase_shifter c (clk, reset, keypad_vert);
 
     // Initialize keypad output to key mapping
     keypad_mapper km (keypad_vert_shifted, keypad_sync, keys_pressed);
 
     // Initialize FSM to control for switch jitter
     // should this return a hex number and an enable or other singal to signify a switch
-    jitter_controller #(.CYCLE_WAIT_TIME(4_000_0)) j (divided_clk_keypad, reset, keys_pressed, key_pressed_value, new_key);
+    jitter_controller #(.CYCLE_WAIT_TIME(4_000_000)) j (clk, reset, keys_pressed, key_pressed_value, new_key);
 
     // Register to store last 2 key presses
-    store_keypresses s (divided_clk_keypad, reset, new_key, key_pressed_value, new_digit, old_digit);
+    store_keypresses s (clk, reset, new_key, key_pressed_value, new_digit, old_digit);
 
     // Convert one hot to hex to display them
     onehot_to_hex o1 (new_digit, new_digit_hex);
