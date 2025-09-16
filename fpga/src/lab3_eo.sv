@@ -24,7 +24,7 @@ module lab3_eo(
     logic new_key;
     logic [3:0] new_digit_hex, old_digit_hex;
 	
-	// Internal high-speed oscillator (outputs 48 Mhz clk)
+	// Internal high-speed oscillator (outputs 6 Mhz clk)
 	HSOSC #(.CLKHF_DIV ("0b11")) hf_osc (.CLKHFPU(1'b1), .CLKHFEN(1'b1), .CLKHF(clk));
 
     // Initialize clock divider for keypad
