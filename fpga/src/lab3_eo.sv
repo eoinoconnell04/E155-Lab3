@@ -50,7 +50,7 @@ module lab3_eo(
 
     // Initialize FSM to control for switch jitter
     // should this return a hex number and an enable or other singal to signify a switch
-    jitter_controller #(.CYCLE_WAIT_TIME(4_000_000)) j (clk, reset, keys_pressed, key_pressed_value, new_key);
+    jitter_controller #(.CYCLE_WAIT_TIME(2_000_000)) j (clk, reset, keys_pressed, key_pressed_value, new_key);
 
     // Register to store last 2 key presses
     store_keypresses s (clk, reset, new_key, key_pressed_value, new_digit, old_digit);
