@@ -30,7 +30,7 @@ module lab3_eo_tb();
 
     // apply test vectors on rising edge of clk (this will effectively be both edges of divided_clk)
     always @(posedge clk) begin
-        $display("Testvector: %b, vector num: %b", testvectors[vectornum], vectornum);
+        $display("Testvector: %b, vector num: %d", testvectors[vectornum], vectornum);
 		#1; {keypad_hori, seg_ex, display1_ex, display2_ex} = testvectors[vectornum];
     end
 
