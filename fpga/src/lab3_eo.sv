@@ -28,7 +28,7 @@ module lab3_eo(
 	HSOSC hf_osc (.CLKHFPU(1'b1), .CLKHFEN(1'b1), .CLKHF(clk));
 
     // Initialize clock divider for keypad
-    divider #(.TOGGLE_COUNT(1000)) div_keypad (.clk(divided_clk_keypad), .reset(reset), .divided_clk(divided_clk_keypad));
+    divider #(.TOGGLE_COUNT(1000)) div_keypad (.clk(clk), .reset(reset), .divided_clk(divided_clk_keypad));
 
     // Initialize clock divider for seven segment display (Goal frequency ~250 Hz, 48 Mhz / n = 250 Hz, n = 192000).
     divider #(.TOGGLE_COUNT(192000)) div_display (.clk(divided_clk_keypad), .reset(reset), .divided_clk(divided_clk_display));
