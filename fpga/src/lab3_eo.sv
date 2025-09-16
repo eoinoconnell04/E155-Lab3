@@ -28,10 +28,10 @@ module lab3_eo(
 	HSOSC hf_osc (.CLKHFPU(1'b1), .CLKHFEN(1'b1), .CLKHF(clk));
 
     // Initialize clock divider for keypad
-    divider #(.TOGGLE_COUNT(1000)) div_keypad (.clk(clk), .reset(reset), .divided_clk(divided_clk_keypad));
+    divider #(.TOGGLE_COUNT(1000)) div_keypad (.clk(divided_clk_keypad), .reset(reset), .divided_clk(divided_clk_keypad));
 
     // Initialize clock divider for seven segment display (Goal frequency ~250 Hz, 48 Mhz / n = 250 Hz, n = 192000).
-    divider #(.TOGGLE_COUNT(1920)) div_display (.clk(clk), .reset(reset), .divided_clk(divided_clk_display));
+    divider #(.TOGGLE_COUNT(192000)) div_display (.clk(divided_clk_keypad), .reset(reset), .divided_clk(divided_clk_display));
 
     // synchronizer to make sure that all keyboard inputs are stable
     synchronizer s1 (divided_clk_keypad, reset, keypad_hori, keypad_sync);
@@ -50,7 +50,7 @@ module lab3_eo(
 
     // Initialize FSM to control for switch jitter
     // should this return a hex number and an enable or other singal to signify a switch
-    jitter_controller #(.CYCLE_WAIT_TIME(4_000_000)) j (divided_clk_keypad, reset, keys_pressed, key_pressed_value, new_key);
+    jitter_controller #(.CYCLE_WAIT_TIME(4_000_0)) j (divided_clk_keypad, reset, keys_pressed, key_pressed_value, new_key);
 
     // Register to store last 2 key presses
     store_keypresses s (divided_clk_keypad, reset, new_key, key_pressed_value, new_digit, old_digit);
