@@ -31,7 +31,7 @@ module lab3_eo(
     divider #(.TOGGLE_COUNT(1000)) div_keypad (.clk(clk), .reset(reset), .divided_clk(divided_clk_keypad));
 
     // Initialize clock divider for seven segment display (Goal frequency ~250 Hz, 48 Mhz / n = 250 Hz, n = 192000).
-    divider #(.TOGGLE_COUNT(192000)) div_display (.clk(divided_clk_keypad), .reset(reset), .divided_clk(divided_clk_display));
+    divider #(.TOGGLE_COUNT(192000)) div_display (.clk(clk), .reset(reset), .divided_clk(divided_clk_display));
 
     // synchronizer to make sure that all keyboard inputs are stable
     synchronizer s1 (divided_clk_keypad, reset, keypad_hori, keypad_sync);
